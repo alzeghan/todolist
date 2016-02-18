@@ -18,6 +18,9 @@ public class HomeController {
 
 		System.out.println("***************** HOME CONTROLLER *********************");
 		String message = "test message";
+//		ModelAndView model = new ModelAndView("helloWorld");
+//		model.addObject("msg", "hello world!");
+
 		return new ModelAndView("index", "message", message);
 
 	}

@@ -1,6 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form" %>
 <%@ include file="../common/header.jspf"%>
 <%--content--%>
 
@@ -14,15 +14,16 @@
 
             <%@ include file="../common/error.jspf"%>
 		<div class="profile--open">
-            <sf:form method="post" action="/login.do" modelAttribute="loginForm">
+		
+		<sf:form method="post" action="login" modelAttribute="userBean">
                 <fieldset>
 
                     
                         <div class="profile__fields well">
                         
                         <div class="field">
-                            <sf:input path="email" id="email" type="text" class="input" placeholder="your@email.com" required="required"/>
-                            <p class="help-block alert-error"><sf:errors path="email" cssClass="error"/></p>
+                            <sf:input path="username" id="username" type="text" class="input" placeholder="username" required="required"/>
+                            <p class="help-block alert-error"><sf:errors path="username" cssClass="error"/></p>
                         
                         </div>
                     <div class="field">

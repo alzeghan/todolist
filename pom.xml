@@ -11,6 +11,8 @@
    <properties>
         <spring.version>4.1.6.RELEASE</spring.version>
         <hibernate.version>4.3.10.Final</hibernate.version>
+        <spring.security.version>4.0.1.RELEASE</spring.security.version>
+        <oauth2.version>2.0.7.RELEASE</oauth2.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
     
@@ -37,6 +39,18 @@
         </dependency>
 		
 		<!--spring-->
+		<dependency>
+    		<groupId>org.springframework</groupId>
+    		<artifactId>spring-core</artifactId>
+    		<version>${spring.version}</version>
+		</dependency>
+    
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-orm</artifactId>
@@ -136,6 +150,23 @@
 
 
         <!-- spring web mvc -->
+        <dependency>
+			<groupId>org.springframework.security.oauth</groupId>
+			<artifactId>spring-security-oauth2</artifactId>
+			<version>${oauth2.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-core</artifactId>
+			<version>${spring.security.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-web</artifactId>
+			<version>${spring.security.version}</version>
+		</dependency>
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-web</artifactId>

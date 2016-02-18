@@ -1,6 +1,10 @@
 package com.todo.persistance.dao.impl;
 
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.List;
+
+import javax.sql.DataSource;
 
 import org.hibernate.Criteria;
 import org.hibernate.criterion.Criterion;
@@ -40,5 +44,39 @@ public class UserDaoImpl extends AbstractGenericDaoImpl<Users, Integer> implemen
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	
+
+	@Override
+	public boolean isValidUser(String username, String password) throws SQLException
+	{
+		try {
+			Criteria criteria = getSession().createCriteria(Users.class);
+			criteria.add(Restrictions.eq("username", username));
+			criteria.add(Restrictions.eq("password", password));
+
+			Users user = (Users) criteria.uniqueResult();
+			return (user != null);
+
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			logger.error(ex.getMessage());
+		}
+		
+return false;
+
+		
+		
+////		String query = "Select count(1) from user where username = ? and password = ?";
+////		PreparedStatement pstmt = dataSource.getConnection().prepareStatement(query);
+////		pstmt.setString(1, username);
+////		pstmt.setString(2, password);
+//		ResultSet resultSet = pstmt.executeQuery();
+//		if(resultSet.next())
+//		    return (resultSet.getInt(1) > 0);
+//        else
+//           return false;
+       }
+
 
 }

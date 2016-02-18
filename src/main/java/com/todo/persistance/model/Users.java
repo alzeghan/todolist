@@ -11,10 +11,10 @@ import org.hibernate.annotations.Generated;
 import org.hibernate.annotations.GenerationTime;
 
 @Entity(name="users")
-@NamedQueries({
-        @NamedQuery(name = "findUserByEmail", query = "SELECT u FROM users u where u.email = :p_email"),
-        @NamedQuery(name = "findUserByEmailAndPassword", query = "SELECT u FROM users u where u.email = :p_email and u.password = :p_password")
-})
+//@NamedQueries({
+//        @NamedQuery(name = "findUserByEmail", query = "SELECT u FROM users u where u.email = :p_email"),
+//        @NamedQuery(name = "findUserByEmailAndPassword", query = "SELECT u FROM users u where u.email = :p_email and u.password = :p_password")
+//})
 public class Users implements Serializable {
 
     @Id
@@ -23,16 +23,16 @@ public class Users implements Serializable {
 
     private String name;
 
-    private String email;
+    private String username;
 
     private String password;
 
     public Users() {
     }
 
-    public Users(String name, String email, String password) {
+    public Users(String name, String username, String password) {
         this.name = name;
-        this.email = email;
+        this.username = username;
         this.password = password;
     }
 
@@ -48,12 +48,12 @@ public class Users implements Serializable {
         this.name = name;
     }
 
-    public String getEmail() {
-        return email;
+    public String getUsername() {
+        return username;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getPassword() {
@@ -69,7 +69,7 @@ public class Users implements Serializable {
         return "User[" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", email='" + email + '\'' +
+                ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
                 ']';
     }

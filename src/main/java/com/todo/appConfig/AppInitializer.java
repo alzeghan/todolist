@@ -1,4 +1,4 @@
-package com.todo.persistance.config;
+package com.todo.appConfig;
 
 import java.util.EnumSet;
 

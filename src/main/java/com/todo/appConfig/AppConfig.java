@@ -1,4 +1,4 @@
-package com.todo.persistance.config;
+package com.todo.appConfig;
 
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
