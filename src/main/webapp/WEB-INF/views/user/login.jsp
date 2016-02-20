@@ -10,41 +10,36 @@
         <div class="span6 offset3">
             <div class="page-header">
                 <h1>Login</h1>
+                
+                <c:url var="loginUrl" value="/login" />
+						<form action="${loginUrl}" method="post" class="form-horizontal">
+							<c:if test="${param.error != null}">
+								<div class="alert alert-danger">
+									<p>Invalid username and password.</p>
+								</div>
+							</c:if>
+							<c:if test="${param.logout != null}">
+								<div class="alert alert-success">
+									<p>You have been logged out successfully.</p>
+								</div>
+							</c:if>
+							<div class="input-group input-sm">
+								<label class="input-group-addon" for="username"><i class="fa fa-user"></i></label>
+								<input type="text" class="form-control" id="username" name="ssoId" placeholder="Enter Username" required>
+							</div>
+							<div class="input-group input-sm">
+								<label class="input-group-addon" for="password"><i class="fa fa-lock"></i></label> 
+								<input type="password" class="form-control" id="password" name="password" placeholder="Enter Password" required>
+							</div>
+							<input type="hidden" name="${_csrf.parameterName}"  value="${_csrf.token}" />
+								
+							<div class="form-actions">
+								<input type="submit"
+									class="btn btn-block btn-primary btn-default" value="Log in">
+							</div>
             </div>
 
-            <%@ include file="../common/error.jspf"%>
-		<div class="profile--open">
-		
-		<sf:form method="post" action="login" modelAttribute="userBean">
-                <fieldset>
-
-                    
-                        <div class="profile__fields well">
-                        
-                        <div class="field">
-                            <sf:input path="username" id="username" type="text" class="input" placeholder="username" required="required"/>
-                            <p class="help-block alert-error"><sf:errors path="username" cssClass="error"/></p>
-                        
-                        </div>
-                    <div class="field">
-                            <sf:input type="password" path="password" id="password" class="input" placeholder="min 6 characters" required="required"/>
-                            <p class="help-block alert-error"><sf:errors path="password" cssClass="error"/></p>
-                    </div>
-
-                    
-                    <div class="profile__footer">
-                        <button type="submit" class="btnsub"><i class="icon-lock icon-white"></i> Login</button>
-                        <div style="margin-top:5px;">
-                        You don't have an account yet? <a href="/register">Register here!</a></div>
-                    </div>
-
-				</div>
-                </fieldset>
-            </sf:form>
-		</div>
-        </div>
-    </div>
-</div>
+	</div>
 
 <%--end content--%>
 <%@ include file="../common/footer.jspf"%>

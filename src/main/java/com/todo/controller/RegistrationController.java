@@ -4,14 +4,10 @@ import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
-import org.springframework.security.config.annotation.web.servlet.configuration.EnableWebMvcSecurity;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -22,38 +18,34 @@ import com.todo.persistance.service.UserService;
 
 
 @Controller
-@EnableWebMvcSecurity
-public class LoginController
+public class RegistrationController
 {
 	@Autowired
-	private UserService loginService;
+	private UserService userService;
 
     @Autowired
     private MessageSource messageProvider;
     
-	@RequestMapping(value="/loginqwe",method=RequestMethod.GET)
+	@RequestMapping(value="/register",method=RequestMethod.GET)
 	public ModelAndView displayLogin(HttpServletRequest request, HttpServletResponse response)
 	{
-		ModelAndView model = new ModelAndView("user/login");
+		ModelAndView model = new ModelAndView("user/register");
 		Users userBean = new Users();
 		model.addObject("userBean", userBean);
 		return model;
 	}
-	@RequestMapping(value="/loginqwe",method=RequestMethod.POST)
-	public ModelAndView executeLogin(HttpServletRequest request, HttpServletResponse response,Model reqmodel, @ModelAttribute("userBean")Users userBean)
+	@RequestMapping(value="/register",method=RequestMethod.POST)
+	public ModelAndView executeLogin(HttpServletRequest request, HttpServletResponse response, @ModelAttribute("userBean")Users userBean)
 	{
 		ModelAndView model= null;
 		try
 		{
-			boolean isValidUser = loginService.isValidUser(userBean.getUsername(), userBean.getPassword());
+			boolean isValidUser = userService.isValidUser(userBean.getUsername(), userBean.getPassword());
 			System.out.println(isValidUser);
 			if(isValidUser){
 				System.out.println("User Login Successful");
 				request.setAttribute("loggedInUser", userBean.getUsername());
 				model = new ModelAndView("index");
-				reqmodel.addAttribute("CurrPrincipal",
-				            SecurityContextHolder.getContext()
-				                .getAuthentication().getName());
 			}else{
 				model = new ModelAndView("user/login");
 				model.addObject("userBean", userBean);
@@ -65,13 +57,7 @@ public class LoginController
 		{
 			e.printStackTrace();
 		}
-		
+
 		return model;
 	}
-	
-	@RequestMapping("/user/logout")
-    public String logout(HttpSession session) {
-        session.invalidate();
-        return "index";
-    }
 }

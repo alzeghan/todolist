@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.todo.persistance.dao.UserDao;
+import com.todo.persistance.model.Users;
 import com.todo.persistance.service.UserService;
 
 @Component("UserService")
@@ -31,4 +32,17 @@ public class UserServiceImpl implements UserService {
 	{
 		return userDao.isValidUser(username, password);
 	}
+	
+	@Override
+	public Users getValidUser(String username, String password) throws SQLException
+	{
+		return userDao.getUserByUsernamePassword(username, password);
+	}
+	
+	@Override
+	public Users getValidUserByUsername(String username) throws SQLException
+	{
+		return userDao.getUserByUsername(username);
+	}
+	
 }

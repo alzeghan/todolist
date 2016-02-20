@@ -4,22 +4,26 @@ import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.http.MediaType;
+import org.springframework.security.config.annotation.web.servlet.configuration.EnableWebMvcSecurity;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.ContentNegotiationConfigurer;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.PathMatchConfigurer;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
 
 @Configuration
-@EnableWebMvc
+@EnableWebMvcSecurity
 @ComponentScan(basePackages = { "com.todo"})
+@Import(value = { SecurityConfiguration.class })
+
 @PropertySource(value = { "classpath:application.properties" })
 public class AppConfig extends WebMvcConfigurerAdapter {
 
@@ -45,7 +49,15 @@ public class AppConfig extends WebMvcConfigurerAdapter {
 		messageSource.setBasenames("messages", "errors");
 		return messageSource;
 	}
-
+	/*
+     * Configure ResourceHandlers to serve static resources like CSS/ Javascript etc...
+     *
+     */
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        registry.addResourceHandler("/static/**").addResourceLocations("/static/");
+        registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
+    }
 	/**
 	 * Total customization - see below for explanation.
 	 */

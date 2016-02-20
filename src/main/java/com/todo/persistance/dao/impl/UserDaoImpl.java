@@ -63,7 +63,7 @@ public class UserDaoImpl extends AbstractGenericDaoImpl<Users, Integer> implemen
 			logger.error(ex.getMessage());
 		}
 		
-return false;
+		return false;
 
 		
 		
@@ -77,6 +77,38 @@ return false;
 //        else
 //           return false;
        }
+	@Override
+	public Users getUserByUsernamePassword(String username, String password){
+		try {
+			Criteria criteria = getSession().createCriteria(Users.class);
+			criteria.add(Restrictions.eq("username", username));
+			criteria.add(Restrictions.eq("password", password));
 
+			Users user = (Users) criteria.uniqueResult();
+			return user;
 
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			logger.error(ex.getMessage());
+		}
+		
+		return null;
+	}
+	
+	@Override
+	public Users getUserByUsername(String username){
+		try {
+			Criteria criteria = getSession().createCriteria(Users.class);
+			criteria.add(Restrictions.eq("username", username));
+			
+			Users user = (Users) criteria.uniqueResult();
+			return user;
+
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			logger.error(ex.getMessage());
+		}
+		
+		return null;
+	}
 }
