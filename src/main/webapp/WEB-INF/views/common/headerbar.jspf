@@ -8,9 +8,7 @@
         <div class="container">
             <a class="brand" href="/"><img title="Emirates Reit" src="/static/img/reit-logo.png" class="logoImage"> Todo List</a>
 
-            <%--logged in mode --%>
-            <c:if test="${sessionScope['scopedTarget.sessionData'].user != null}">
-            
+            <c:if test="${pageContext.request.userPrincipal.name != null}">            
             
             <div class="btn-group pull-right">
             <form class="form-search" style="margin: 0 0 5px;" action="/user/todos/search" id="searchForm" method="get">
@@ -22,8 +20,7 @@
             </div>
             </c:if>
 
-            <%--not logged in mode --%>
-            <c:if test="${sessionScope['scopedTarget.sessionData'].user == null}">
+            <c:if test="${pageContext.request.userPrincipal.name == null}">
             <ul class="nav pull-right">
                 <li class="${registerTabStyle}"><a href="/register">Register</a></li>
                 <li class="${loginTabStyle}"><a href="${pageContext.request.contextPath}/login">Login</a></li>

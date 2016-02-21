@@ -1,13 +1,9 @@
 package com.todo.persistance.dao.impl;
 
-import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
 
-import javax.sql.DataSource;
-
 import org.hibernate.Criteria;
-import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Restrictions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -101,7 +97,7 @@ public class UserDaoImpl extends AbstractGenericDaoImpl<Users, Integer> implemen
 			Criteria criteria = getSession().createCriteria(Users.class);
 			criteria.add(Restrictions.eq("username", username));
 			
-			Users user = (Users) criteria.uniqueResult();
+			Users user = (Users) criteria.setMaxResults(1).uniqueResult();
 			return user;
 
 		} catch (Exception ex) {

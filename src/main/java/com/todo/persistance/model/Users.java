@@ -3,26 +3,24 @@ package com.todo.persistance.model;
 import java.io.Serializable;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
+import javax.persistence.SequenceGenerator;
 
 import org.hibernate.annotations.Generated;
 import org.hibernate.annotations.GenerationTime;
+import org.hibernate.annotations.GenericGenerator;
 
 @Entity(name="users")
-//@NamedQueries({
-//        @NamedQuery(name = "findUserByEmail", query = "SELECT u FROM users u where u.email = :p_email"),
-//        @NamedQuery(name = "findUserByEmailAndPassword", query = "SELECT u FROM users u where u.email = :p_email and u.password = :p_password")
-//})
 public class Users implements Serializable {
 
     @Id
     @Generated(GenerationTime.INSERT)
     private Long id;
 
-    private String name;
-
+    private String firstName;
+    private String lastName;
     private String username;
 
     private String password;
@@ -30,25 +28,40 @@ public class Users implements Serializable {
     public Users() {
     }
 
-    public Users(String name, String username, String password) {
-        this.name = name;
+    public Users(String firstName, String lastName, String username, String password) {
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.username = username;
         this.password = password;
     }
 
+    @Id @GeneratedValue(generator="foreign")
+    @GenericGenerator(name="foreign", strategy = "increment")
     public Long getId() {
         return id;
     }
 
-    public String getName() {
-        return name;
-    }
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-    public void setName(String name) {
-        this.name = name;
-    }
+    public String getFirstName() {
+		return firstName;
+	}
 
-    public String getUsername() {
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+	public String getUsername() {
         return username;
     }
 
@@ -68,9 +81,11 @@ public class Users implements Serializable {
     public String toString() {
         return "User[" +
                 "id=" + id +
-                ", name='" + name + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
                 ']';
     }
 }
+

@@ -70,13 +70,13 @@
                 </div><!-- ei-slider -->
                 <div class="reference">
 					<p>Keep tracking your business</p>
-					<c:if test="${sessionScope['scopedTarget.sessionData'].user == null}">
+					<c:if test="${pageContext.request.userPrincipal.name == null}">
                     <p>
                         <a class="btnsub btn-large" style="padding:11px 19px;margin-right:5px;" href="/login"> Sign in </a> | <a class="btnsub btn-large" style="background-color:#006dcc;padding:11px 19px;" href="/register"> Sign up </a>
                     </p>
                     </c:if>
 
-                    <c:if test="${sessionScope['scopedTarget.sessionData'].user != null}">
+                    <c:if test="${pageContext.request.userPrincipal.name != null}">
                         <p>
                             <a style="padding-bottom: 20px; padding-top: 20px;" class="btnsub" href="/user/todos"> My todo list >> </a>
                         </p>

@@ -3,5 +3,4 @@
  "http://java.sun.com/dtd/web-app_2_3.dtd" >
 
 <web-app>
-  <display-name>Todo List Assignment</display-name>
 </web-app>

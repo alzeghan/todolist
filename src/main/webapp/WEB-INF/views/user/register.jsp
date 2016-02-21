@@ -12,9 +12,9 @@
                 <h1>Register</h1>
             </div>
 			<div class="profile--open">
-            <sf:form method="post" modelAttribute="registrationForm" action="/register.do">
+            <sf:form method="post" modelAttribute="userDTO" action="/register.do">
 
-                <%@ include file="../common/error.jspf"%>
+                <%@ include file="../common/error.jsp"%>
 
                 <fieldset>
 				<div class="profile__fields well">
@@ -22,15 +22,21 @@
 				
                     <div class="field">
                         <div class="controls">
-                            <sf:input path="name" id="name" type="text" class="input" placeholder="Name" required="required"/>
-                            <p class="help-block alert-error"><sf:errors path="name" cssClass="error"/></p>
+                            <sf:input path="firstName" id="firstName" type="text" class="input" placeholder="First Name" required="required"/>
+                            <p class="help-block alert-error"><sf:errors path="firstName" cssClass="error"/></p>
                         </div>
                     </div>
 
+					<div class="field">
+                        <div class="controls">
+                            <sf:input path="lastName" id="lastName" type="text" class="input" placeholder="Last Name" required="required"/>
+                            <p class="help-block alert-error"><sf:errors path="lastName" cssClass="error"/></p>
+                        </div>
+                    </div>
                     <div class="field">
                         <div class="controls">
-                            <sf:input path="email" id="email" type="text" class="input" placeholder="your@email.com" required="required"/>
-                            <p class="help-block alert-error"><sf:errors path="email" cssClass="error"/></p>
+                            <sf:input path="username" id="username" type="text" class="input" placeholder="Username" required="required"/>
+                            <p class="help-block alert-error"><sf:errors path="username" cssClass="error"/></p>
                         </div>
                     </div>
 
@@ -45,8 +51,8 @@
                     <div class="field">
                         
                         <div class="controls">
-                            <sf:input type="password" path="confirmationPassword" id="confirmationPassword" class="input" placeholder="Confirm password" required="required"/>
-                            <p class="help-block alert-error"><sf:errors path="confirmationPassword" cssClass="error"/></p>
+                            <sf:input type="password" path="matchingPassword" id="matchingPassword" class="input" placeholder="Confirm password" required="required"/>
+                            <p class="help-block alert-error"><sf:errors path="matchingPassword" cssClass="error"/></p>
                         </div>
                     </div>
 

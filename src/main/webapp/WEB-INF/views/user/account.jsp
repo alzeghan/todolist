@@ -15,7 +15,7 @@
                     <h2>Account Settings</h2>
                 </div>
 
-                <%@ include file="../common/error.jspf"%>
+                <%@ include file="../common/error.jsp"%>
 
                 <div class="row">
                     <div class="span8">

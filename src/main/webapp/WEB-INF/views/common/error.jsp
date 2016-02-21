@@ -2,7 +2,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <c:if test="${error != null}">
-    <div class="alert alert-error">
-        <strong>${error}</strong>
-    </div>
+	<div class="alert alert-danger">
+		<p>${error}</p>
+	</div>
 </c:if>

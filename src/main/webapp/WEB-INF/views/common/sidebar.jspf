@@ -4,7 +4,7 @@
 
 <div class="sidebar-nav">
     <ul class="nav nav-list">
-        <li class="nav-header">Hi ${sessionScope['scopedTarget.sessionData'].user.name} !</li>
+        <li class="nav-header">Hi ${pageContext.request.userPrincipal.name} !</li>
         <li class="divider"></li> 
         <li><a href="/user/todos"><i class="icon-home"></i> Home</a></li>
         <li class="divider"></li> 
@@ -12,6 +12,11 @@
         <li class="divider"></li> 
         <li><a href="/user/todos/new"><i class="icon-file"></i> Create a todo</a></li>
         <li class="divider"></li> 
-        <li><a href="/user/logout"><i class="icon-logout"></i> Sign out</a></li>
+        <li><a href="javascript:document.getElementById('logout').submit()"><i class="icon-logout"></i> Sign out</a></li>
     </ul>
+    
+<form id="logout" action="${logoutUrl}" method="post" >
+  <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+</form>
+
 </div>
