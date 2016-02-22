@@ -1,9 +1,9 @@
 package com.todo.persistance.dao;
 
-import com.todo.persistance.model.TodoPriority;
+import com.todo.persistance.model.TaskPriority;
 
-public interface TodoPriorityDao extends GenericDao<TodoPriority, Integer> {
+public interface TodoPriorityDao extends GenericDao<TaskPriority, Integer> {
 
-	TodoPriority getPriorityById(int priorityId);
+	TaskPriority getPriorityById(int priorityId);
 
 }

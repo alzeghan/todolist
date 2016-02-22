@@ -7,12 +7,12 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
 import com.todo.persistance.dao.TodoDao;
-import com.todo.persistance.model.Todo;
+import com.todo.persistance.model.Task;
 import com.todo.persistance.model.Users;
 
 
 @Repository
-public class TodoDaoImpl extends AbstractGenericDaoImpl<Todo, Integer> implements TodoDao {
+public class TodoDaoImpl extends AbstractGenericDaoImpl<Task, Integer> implements TodoDao {
 
 	private static final Logger logger = LoggerFactory.getLogger(TodoDaoImpl.class);
 
@@ -34,7 +34,7 @@ public class TodoDaoImpl extends AbstractGenericDaoImpl<Todo, Integer> implement
 
 	}
 	
-	public Todo getTodoById(int todoId) {
+	public Task getTodoById(int todoId) {
 		// TODO Auto-generated method stub
 		return null;
 	}

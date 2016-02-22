@@ -68,10 +68,9 @@ public class EmployeController {
 	}
 
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
-	public ModelAndView createBuildingView(HttpServletRequest request,
-			HttpServletResponse response, Model model) {
+	public ModelAndView createBuildingView(HttpServletRequest request, HttpServletResponse response, Model model) {
+		
 		ModelAndView modelview = new ModelAndView("employee/create");
-		modelview.addObject("registerTabStyle", "active");
 		EmployeeDTO emp = new EmployeeDTO();
 		emp.setActive(true);
 		modelview.addObject("emp", emp);
@@ -80,9 +79,7 @@ public class EmployeController {
 	}
 
 	@RequestMapping(value = "/create.do", method = RequestMethod.POST)
-	public ModelAndView createBuilding(HttpServletRequest request,
-			HttpServletResponse response,
-			@ModelAttribute("emp") @Valid EmployeeDTO requestModel) throws Exception{
+	public ModelAndView createBuilding(HttpServletRequest request, HttpServletResponse response, @ModelAttribute("emp") @Valid EmployeeDTO requestModel){
 		ModelAndView model = new ModelAndView();
 		try {
 			Employee emp = new Employee();
@@ -95,8 +92,8 @@ public class EmployeController {
 			employeeService.createEmployee(emp);
 
 			System.out.println("creaed " + emp.getName());
-		} catch (Exception e) {
-			throw new Exception(e);
+		} catch (Exception ex) {
+			System.out.println("ERROR adding employee: " + ex.getMessage());
 		}
 
 		model = new ModelAndView("redirect:/employee/list");

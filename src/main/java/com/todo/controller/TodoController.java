@@ -27,8 +27,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.todo.persistance.model.Todo;
-import com.todo.persistance.model.TodoPriority;
+import com.todo.persistance.model.Task;
+import com.todo.persistance.model.TaskPriority;
 import com.todo.persistance.model.Users;
 import com.todo.util.TodoListUtils;
 import com.todo.util.TodoPriorityPropertyEditor;
@@ -53,7 +53,7 @@ public class TodoController {
         SimpleDateFormat dateFormat = new SimpleDateFormat(TodoListUtils.DATE_FORMAT);
         dateFormat.setLenient(false);
         binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, false));
-        binder.registerCustomEditor(TodoPriority.class, new TodoPriorityPropertyEditor());
+        binder.registerCustomEditor(TaskPriority.class, new TodoPriorityPropertyEditor());
     }
 
     /**

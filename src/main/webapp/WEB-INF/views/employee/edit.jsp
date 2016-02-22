@@ -57,12 +57,14 @@
                         
                           <div class="control-group">
 							<sf:label path="active" class="control-label">
-							Active/in-active
+							Status
 						</sf:label>
-							<sf:radiobutton path="active" value="true" />
-							Active
-							<sf:radiobutton path="active" value="false" />
-							in-Active
+							<div >
+								<sf:radiobutton path="active" value="true" style="margin-left: 20px;"/>
+								<span>Active</span>
+								<sf:radiobutton path="active" value="false" style="margin-left: 20px;" />
+								in-Active
+							</div>
 						</div>
 
 

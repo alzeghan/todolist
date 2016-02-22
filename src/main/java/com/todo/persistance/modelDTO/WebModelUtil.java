@@ -2,6 +2,7 @@ package com.todo.persistance.modelDTO;
 
 import com.todo.persistance.model.Building;
 import com.todo.persistance.model.Employee;
+import com.todo.persistance.model.Task;
 
 
 public class WebModelUtil {
@@ -29,6 +30,19 @@ public class WebModelUtil {
 		return employee;
 	}
 
+	public static TaskDTO createTaskDTO(Task task) {
+
+		TaskDTO taskDto=new TaskDTO();
+		taskDto.setId(task.getId());
+		taskDto.setAssignedTo(task.getAssignedTo());
+		taskDto.setDescription(task.getDescription());
+		taskDto.setDueDate(task.getDueDate());
+		taskDto.setStartDate(task.getStartDate());
+		taskDto.setStatus(task.isStatus());
+		taskDto.setActive(task.isActive());
+		taskDto.setPriority(task.getPriority());
+		return taskDto;
+	}
 	
 
 }

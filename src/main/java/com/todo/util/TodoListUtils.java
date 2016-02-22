@@ -1,7 +1,7 @@
 package com.todo.util;
 
-import com.todo.persistance.model.Todo;
-import com.todo.persistance.model.TodoPriority;
+import com.todo.persistance.model.Task;
+import com.todo.persistance.model.TaskPriority;
 
 import java.util.List;
 import java.util.regex.Matcher;
@@ -21,7 +21,7 @@ public class TodoListUtils {
      * @param priority the priority of the todo
      * @return the icon name
      */
-    public static String getPriorityIcon(TodoPriority priority) {
+    public static String getPriorityIcon(TaskPriority priority) {
 
         String priorityIcon = "";
 
@@ -88,10 +88,10 @@ public class TodoListUtils {
      * @param todoList the todos list
      * @return the number of todos done
      */
-    public static int countTotalDone(List<Todo> todoList) {
+    public static int countTotalDone(List<Task> todoList) {
         int count = 0;
-        for (Todo todo : todoList) {
-            if (todo.isDone()) {
+        for (Task task : todoList) {
+            if (task.isStatus()) {
                 count ++;
             }
         }

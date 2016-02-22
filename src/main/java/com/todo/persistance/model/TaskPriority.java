@@ -1,6 +1,6 @@
 package com.todo.persistance.model;
 
-public enum TodoPriority {
+public enum TaskPriority {
     LOW,
     MEDIUM,
     HIGH

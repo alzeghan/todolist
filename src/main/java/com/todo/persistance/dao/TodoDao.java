@@ -1,9 +1,9 @@
 package com.todo.persistance.dao;
 
-import com.todo.persistance.model.Todo;
+import com.todo.persistance.model.Task;
 
-public interface TodoDao extends GenericDao<Todo, Integer> {
+public interface TodoDao extends GenericDao<Task, Integer> {
 
-	Todo getTodoById(int todoId);
+	Task getTodoById(int todoId);
 
 }

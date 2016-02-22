@@ -10,12 +10,12 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
 import com.todo.persistance.dao.TodoPriorityDao;
-import com.todo.persistance.model.TodoPriority;
+import com.todo.persistance.model.TaskPriority;
 import com.todo.persistance.model.Users;
 
 
 @Repository
-public class TodoPriorityDaoImpl extends AbstractGenericDaoImpl<TodoPriority, Integer> implements TodoPriorityDao {
+public class TodoPriorityDaoImpl extends AbstractGenericDaoImpl<TaskPriority, Integer> implements TodoPriorityDao {
 
 	private static final Logger logger = LoggerFactory.getLogger(TodoPriorityDaoImpl.class);
 
@@ -37,7 +37,7 @@ public class TodoPriorityDaoImpl extends AbstractGenericDaoImpl<TodoPriority, In
 
 	}
 
-	public TodoPriority getPriorityById(int priorityId) {
+	public TaskPriority getPriorityById(int priorityId) {
 		// TODO Auto-generated method stub
 		return null;
 	}

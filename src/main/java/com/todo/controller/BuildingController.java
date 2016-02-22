@@ -52,16 +52,17 @@ public class BuildingController {
 	UserDetailsService userDetailsService;
 
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public String BuildingHome(Locale locale, Model model) throws Exception {
-
+	public ModelAndView BuildingHome(Locale locale, Model model) throws Exception {
+		
+		ModelAndView modelAndView = new ModelAndView();
 		List<Building> buildingFromDb = buildingService.getAllBuilding();
 		List<BuildingDTO> buildingList = new ArrayList<BuildingDTO>();
 		for (Building building : buildingFromDb) {
 			buildingList.add(WebModelUtil.createBuildingDTO(building));
 		}
-
-		model.addAttribute("buildingList", buildingList);
-		return "building/list";
+		modelAndView.setViewName("building/list");
+		modelAndView.addObject("buildingList", buildingList);
+		return modelAndView;
 	}
 
 	@RequestMapping(value = "/create", method = RequestMethod.GET)

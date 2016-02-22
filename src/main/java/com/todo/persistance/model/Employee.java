@@ -14,15 +14,15 @@ import javax.persistence.Table;
 public class Employee implements Serializable {
 	@Id
 	@GeneratedValue
-	@Column(name = "ID")
+	@Column(name = "EMPLOYEE_ID")
 	private Long id;
 
 	@Column(name = "NAME", nullable = false, unique=true)
 	private String name;
-//
+
 //	@Column(name = "DOB")
 //	private Date dateOfBirth;
-//
+	
 //	@Column(name = "DATE_OF_HIRE")
 //	private Date dateOfHire;
 
@@ -60,22 +60,6 @@ public class Employee implements Serializable {
 	public void setName(String name) {
 		this.name = name;
 	}
-
-//	public Date getDateOfBirth() {
-//		return dateOfBirth;
-//	}
-//
-//	public void setDateOfBirth(Date dateOfBirth) {
-//		this.dateOfBirth = dateOfBirth;
-//	}
-//
-//	public Date getDateOfHire() {
-//		return dateOfHire;
-//	}
-//
-//	public void setDateOfHire(Date dateOfHire) {
-//		this.dateOfHire = dateOfHire;
-//	}
 
 	public BigDecimal getSalary() {
 		return salary;

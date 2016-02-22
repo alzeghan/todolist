@@ -7,7 +7,7 @@ public class BuildingDTO implements Serializable {
 	private Long id;
 	private String name;
 	private String location;
-	private Boolean active;
+	private boolean active;
 
 	public Long getId() {
 		return id;
@@ -33,11 +33,11 @@ public class BuildingDTO implements Serializable {
 		this.location = location;
 	}
 
-	public Boolean getActive() {
+	public boolean getActive() {
 		return active;
 	}
 
-	public void setActive(Boolean active) {
+	public void setActive(boolean active) {
 		this.active = active;
 	}
 	
