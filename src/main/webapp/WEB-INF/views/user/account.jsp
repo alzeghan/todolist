@@ -68,7 +68,7 @@
 
                 <div class="row">
                     <div class="span8">
-                        <form action="/account/password.do" method="post" class="form-horizontal" modelAttribute="changePasswordDTO">
+                        <form action="/user/account/password.do" method="post" class="form-horizontal" modelAttribute="changePasswordDTO">
 
                             <fieldset>
 

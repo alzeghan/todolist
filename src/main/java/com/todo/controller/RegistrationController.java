@@ -162,13 +162,13 @@ public class RegistrationController
 	            model.addAttribute("updateProfileSuccessMessage", messageProvider.getMessage("account.profile.update.success", null, Locale.ENGLISH));
 	            model.addAttribute("changePasswordDTO", new ChangePasswordDTO()); //needed since the update password form is on the same page
 	        }
-	        model.addAttribute("user", user);
+	        model.addAttribute("user", users);
 	        return "user/account";
 	    }
 	 
 	    @RequestMapping(value = "/account/delete.do", method = RequestMethod.POST)
 	    public String deleteAccount(HttpServletRequest request, HttpServletResponse response) {
-	    	Users user = (Users)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+	    	User user = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 	    	
 	    	 try{
 			        Users users = userService.getValidUserByUsername(user.getUsername());
@@ -187,27 +187,35 @@ public class RegistrationController
 	    @RequestMapping(value = "/user/account/password.do", method = RequestMethod.POST)
 	    public String changePassword(@Valid ChangePasswordDTO changePasswordDTO, BindingResult bindingResult, Model model) {
 	        User user = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-	        String view = "account";
+	        String view = "user/account";
+	        Users users = new Users();
+	        try{
+		        users = userService.getValidUserByUsername(user.getUsername());
+		            
+	        }catch(Exception ex){
+	        	System.out.println("ERROR: " + ex.getMessage());
+	        }
+	        
 
 	        if (bindingResult.hasErrors()) {
-	            model.addAttribute("user", user);
+	            model.addAttribute("user", users);
 	            return view;
 	        }
 	        
 	        if (!changePasswordDTO.getNewPassword().equals(changePasswordDTO.getConfirmationPassword())) {
 	            model.addAttribute("error", messageProvider.getMessage("account.password.confirmation.error", null, Locale.ENGLISH));
-	            model.addAttribute("user", user);
+	            model.addAttribute("user", users);
 	            return view;
 	        }
 	        
 	        if (currentPasswordIsIncorrect(changePasswordDTO, user)) {
 	            model.addAttribute("error", messageProvider.getMessage("account.password.error", null,Locale.ENGLISH));
-	            model.addAttribute("user", user);
+	            model.addAttribute("user", users);
 	            return view;
 	        }
 	        
 	        try{
-		        Users users = userService.getValidUserByUsername(user.getUsername());
+		        users = userService.getValidUserByUsername(user.getUsername());
 		        users.setPassword(changePasswordDTO.getNewPassword());
 		        userDoa.update(users);     
 	        }catch(Exception ex){
@@ -216,7 +224,7 @@ public class RegistrationController
 	        
 	        
 	        model.addAttribute("updatePasswordSuccessMessage", messageProvider.getMessage("account.password.update.success", null, Locale.ENGLISH));
-	        model.addAttribute("user", user);
+	        model.addAttribute("user", users);
 	        return view;
 
 	    }
