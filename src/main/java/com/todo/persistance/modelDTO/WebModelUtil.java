@@ -34,7 +34,7 @@ public class WebModelUtil {
 
 		TaskDTO taskDto=new TaskDTO();
 		taskDto.setId(task.getId());
-		taskDto.setAssignedTo(task.getAssignedTo());
+		taskDto.setAssignedTo(task.getEmployee());
 		taskDto.setDescription(task.getDescription());
 		taskDto.setDueDate(task.getDueDate());
 		taskDto.setStartDate(task.getStartDate());

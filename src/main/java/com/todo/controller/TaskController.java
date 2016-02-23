@@ -1,6 +1,8 @@
 package com.todo.controller;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
@@ -10,11 +12,15 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.context.MessageSource;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -22,11 +28,14 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.todo.persistance.model.Employee;
 import com.todo.persistance.model.Task;
+import com.todo.persistance.model.TaskPriority;
 import com.todo.persistance.modelDTO.TaskDTO;
 import com.todo.persistance.modelDTO.WebModelUtil;
 import com.todo.persistance.service.EmployeeService;
 import com.todo.persistance.service.TaskService;
 import com.todo.persistance.service.UserService;
+import com.todo.util.TodoListUtils;
+import com.todo.util.TodoPriorityPropertyEditor;
 
 @Controller
 @RequestMapping("/task")
@@ -47,6 +56,15 @@ public class TaskController {
 	@Qualifier("customUserDetailsService")
 	UserDetailsService userDetailsService;
 
+	@InitBinder
+    public void initBinder(WebDataBinder binder) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat(TodoListUtils.DATE_FORMAT);
+        dateFormat.setLenient(false);
+        binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, false));
+//        binder.registerCustomEditor(TaskPriority.class, new TodoPriorityPropertyEditor());
+    }
+	
+	
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public ModelAndView TasksHome(Locale locale, Model model) throws Exception {
 		
@@ -54,8 +72,20 @@ public class TaskController {
 		List<Task> taskFromDb = taskService.getAllTasks();
 		List<TaskDTO> taskList = new ArrayList<TaskDTO>();
 		for (Task task : taskFromDb) {
+//			System.out.println(task.getDescription());
+//			System.out.println(task.getEmployee().toString());
 			taskList.add(WebModelUtil.createTaskDTO(task));
 		}
+		
+		int totalCount = taskList.size();
+        int doneCount = TodoListUtils.countTotalDone(taskList);
+        int todoCount = totalCount - doneCount;
+        modelAndView.addObject("totalCount", totalCount);
+        modelAndView.addObject("doneCount", doneCount);
+        modelAndView.addObject("todoCount", todoCount);
+        modelAndView.addObject("homeTabStyle", "active");
+        
+        
 		modelAndView.setViewName("task/list");
 		modelAndView.addObject("taskList", taskList);
 		return modelAndView;
@@ -70,6 +100,7 @@ public class TaskController {
 		task.setActive(true);
 		
 		List<Employee> allEmployees = employeeService.getAllEmployee();
+		model.addAttribute("today", new SimpleDateFormat(TodoListUtils.DATE_FORMAT).format(new Date()));
 		modelview.addObject("allEmployees",allEmployees);
 		modelview.addObject("task", task);
 
@@ -83,14 +114,17 @@ public class TaskController {
 		
 		ModelAndView model = new ModelAndView();
 		try {
+			Employee emp = employeeService.getEmployeeById(requestModel.getAssignedTo().getId());
 			
 			Task task = new Task();
 			
-			task.setAssignedTo(requestModel.getAssignedTo());
+			task.setEmployee(emp);
 			task.setDescription(requestModel.getDescription());
-			task.setDueDate(requestModel.getDueDate());
-			task.setStartDate(requestModel.getStartDate());
-			task.setStatus(requestModel.isStatus());
+//			task.setDueDate(requestModel.getDueDate());
+//			task.setStartDate(requestModel.getStartDate());
+			task.setDueDate(new Date());
+			task.setStartDate(new Date());
+			task.setStatus(false);
 			task.setActive(requestModel.isActive());
 			task.setPriority(requestModel.getPriority());
 			
@@ -98,7 +132,7 @@ public class TaskController {
 
 			System.out.println("created " + task.getDescription());
 		} catch (Exception e) {
-
+			e.printStackTrace();
 		}
 
 		model = new ModelAndView("redirect:/task/list");
@@ -123,13 +157,17 @@ public class TaskController {
 	public ModelAndView updateTask(HttpServletRequest request,
 			HttpServletResponse response,
 			@ModelAttribute("task") @Valid TaskDTO requestModel) {
-		
+		System.out.println("in update =========");
 		
 		ModelAndView model = new ModelAndView();
 		try {
+			
+			System.out.println("requestModel.getDescription(): "+requestModel.toString());
+			Employee emp = employeeService.getEmployeeById(requestModel.getAssignedTo().getId());
+			
 			Task task = taskService.getTaskById(requestModel.getId());
-					
-			task.setAssignedTo(requestModel.getAssignedTo());
+			
+			task.setEmployee(emp);
 			task.setDescription(requestModel.getDescription());
 			task.setDueDate(requestModel.getDueDate());
 			task.setStartDate(requestModel.getStartDate());
@@ -141,12 +179,27 @@ public class TaskController {
 
 			System.out.println("updated " + task.getDescription());
 		} catch (Exception e) {
-
+			System.out.println(e.getMessage());
 		}
 
 		model = new ModelAndView("redirect:/task/list");
 		return model;
 	}
 
+
+
+  @RequestMapping(value = "/{taskId}/delete", method = RequestMethod.POST)
+  public ModelAndView deleteTodo(@PathVariable long taskId) {
+      ModelAndView modelAndView = new ModelAndView();
+      Task task = taskService.getTaskById(taskId);
+      if (task == null) {
+          modelAndView.addObject("error", messageProvider.getMessage("no.such.todo", new Object[]{taskId}, Locale.ENGLISH));
+          modelAndView.setViewName("error");
+      } else {
+          taskService.removeTask(task);
+          modelAndView.setViewName("redirect:/task/list");
+      }
+      return modelAndView;
+  }
 
 }

@@ -13,7 +13,7 @@
 		<div class="span9">
 			<div class="well">
 				<div class="page-header">
-					<h2>Add new building</h2>
+					<h3>Add New Building</h3><img height="150px" width="250px" src="/static/img/building.png" alt="add building" />
 				</div>
 
 				<sf:form id="createTodoForm" action="/building/create.do"

@@ -1,7 +1,7 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form" %>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ include file="../common/header.jspf"%>
 
@@ -13,34 +13,76 @@
         <div class="span9">
             <div class="well">
                 <div class="page-header">
-                    <h2>Update building profile</h2>
+                    <h2>Update Task</h2>
                 </div>
 
-                <sf:form id="createTodoForm" action="/building/update.do" method="post" class="form-horizontal" modelAttribute="building">
+                <sf:form id="createTaskForm" action="/task/update.do" method="post" class="form-horizontal" modelAttribute="task">
 
                     <fieldset>
-                    <div class="control-group">
-                    
-						 <sf:input type="hidden" path="id" disabled="disabled"/>
-                          </div>
-                                
-                        <div class="control-group">
-                            <label class="control-label" for="name">Title:</label>
+                    <sf:input type="hidden" path="id" disabled="disabled"/>
+                    	<div class="control-group">
+							<label class="control-label" for="name">Description:</label>
+							<div class="controls">
+								<sf:input type="text" class="input" id="description" path="description"
+									required="required" autofocus="autofocus" />
+							</div>
+						</div>
+							
+						<div class="control-group">
+							<label class="control-label" for="employee">Assign To:</label>
+							<div class="controls">
+							
+									<form:select path="assignedTo.id">
+					  					<form:options items="${allEmployees}" itemValue="id" itemLabel="name"/>
+				       				</form:select>
+							
+							</div>
+						</div>
+							
+								
+						<div class="control-group">
+                            <label class="control-label" for="status">Progress:</label>
+							
+							<div class="controls">
+                                <sf:select id="status" path="status">
+                                  <sf:option value="true">Done</sf:option>
+                                  <sf:option value="false">Todo</sf:option>
+                              </sf:select>
+                            </div>
+							
+							</div>
+						
+							
+							
+						<div class="control-group">
+                            <label class="control-label" for="priority">Priority:</label>
                             <div class="controls">
-                                <sf:input type="text" class="inpbox" id="name" path="name" required="required" autofocus="autofocus" />
+                                <sf:select id="priority" path="priority">
+                                  <sf:option value="LOW">Low</sf:option>
+                                  <sf:option value="MEDIUM">Medium</sf:option>
+                                  <sf:option value="HIGH">High</sf:option>
+                                </sf:select>
                             </div>
                         </div>
-
-                        <div class="control-group">
-                            <label class="control-label" for="location">Location:</label>
+							
+						<div class="control-group">
+                            <label class="control-label" for="startDate">Due date:</label>
                             <div class="controls">
-                                <sf:input type="text" class="inpbox" id="location" path="location" required="required" />
+                                <sf:input type="text" class="inpbox" id="startDate" path="startDate" value="${today}" required="required" />
                             </div>
                         </div>
-                        
-                         <div class="control-group">
+							
+						<div class="control-group">
+                            <label class="control-label" for="dueDate">Start date:</label>
+                            <div class="controls">
+                                <sf:input type="text" class="inpbox" id="dueDate" path="dueDate" value="${today}" required="required" />
+                            </div>
+                        </div>
+							
+						
+						<div class="form-group">
 							<sf:label path="active" class="control-label">
-							Active/in-active
+							Status
 						</sf:label>
 							<div >
 								<sf:radiobutton path="active" value="true" style="margin-left: 20px;"/>
@@ -49,6 +91,7 @@
 								in-Active
 							</div>
 						</div>
+
 
  
 						<div class="profile__footer form-actions" >

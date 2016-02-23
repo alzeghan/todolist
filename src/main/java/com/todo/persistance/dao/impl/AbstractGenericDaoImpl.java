@@ -93,6 +93,7 @@ public abstract class AbstractGenericDaoImpl<T, ID extends Serializable> impleme
 
 	@Transactional
 	public T update(T entity) {
+		System.out.println(entity.toString());
 		this.beforeUpdate(entity);
 		return entityManager.merge(entity);
 	}

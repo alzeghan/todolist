@@ -3,40 +3,46 @@ package com.todo.persistance.model;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
-import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.Generated;
 import org.hibernate.annotations.GenerationTime;
-import org.hibernate.validator.constraints.NotEmpty;
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Type;
 
 @SuppressWarnings("serial")
-@Entity(name="TBL_TASK")
+@Entity
+@Table(name = "TBL_TASK")
 public class Task implements Serializable {
 
     @Id
     @Generated(GenerationTime.INSERT)
-    private long id;
+    private Long id;
 
     @Column(columnDefinition="TEXT")
     private String description;
 
-    private boolean status;
-    private boolean active;
+    private Boolean status;
+    private Boolean active;
     
-    
-    @NotEmpty
-    @OneToOne(fetch = FetchType.LAZY)
-	@PrimaryKeyJoinColumn
-	private Employee assignedTo;
+    @OneToOne
+    @JoinColumn(name = "EMPLOYEE_ID") 
+    private Employee employee;
 
     @Enumerated(value = EnumType.ORDINAL)
     private TaskPriority priority;
@@ -51,16 +57,22 @@ public class Task implements Serializable {
     	this.priority = TaskPriority.LOW;
     }
 
-    public Task(long userId, String title, boolean status, TaskPriority priority, Date dueDate, Employee employee) {
-    	this.assignedTo = employee;
+    public Task(Long userId, String title, boolean status, TaskPriority priority, Date dueDate, Employee employee) {
+    	this.employee = employee;
         this.status = status;
         this.priority = priority;
         this.dueDate = dueDate;
     }
 
-    public long getId() {
+    @Id @GeneratedValue(generator="foreign")
+    @GenericGenerator(name="foreign", strategy = "increment")
+    public Long getId() {
         return id;
     }
+
+	public void setId(Long id) {
+		this.id = id;
+	}
 
 	public String getDescription() {
 		return description;
@@ -70,28 +82,28 @@ public class Task implements Serializable {
 		this.description = description;
 	}
 
-	public boolean isStatus() {
+	public Boolean isStatus() {
 		return status;
 	}
 
-	public void setStatus(boolean status) {
+	public void setStatus(Boolean status) {
 		this.status = status;
 	}
 
-	public boolean isActive() {
+	public Boolean isActive() {
 		return active;
 	}
 
-	public void setActive(boolean active) {
+	public void setActive(Boolean active) {
 		this.active = active;
 	}
 
-	public Employee getAssignedTo() {
-		return assignedTo;
+	public Employee getEmployee() {
+		return employee;
 	}
 
-	public void setAssignedTo(Employee assignedTo) {
-		this.assignedTo = assignedTo;
+	public void setEmployee(Employee assignedTo) {
+		this.employee = assignedTo;
 	}
 
 	public TaskPriority getPriority() {

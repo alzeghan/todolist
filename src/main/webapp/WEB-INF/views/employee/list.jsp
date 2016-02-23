@@ -18,9 +18,8 @@
 				
 				<div class="panel-body">
 				<c:url value="create" var="create" />
-				<a class="btn btn-primary btn-sm" role="button"
-					href="${create}"> <i class="icon-plus"></i> <span>New</span>
-				</a>
+				<span><a href="${create}" class="btnsub" style="padding: 10px;"> + New Employee</a></span>
+				
 			</div>
 
 				<div class="table-responsive">
@@ -32,8 +31,7 @@
 								<th width="200">Title</th>
 								<th width="200">Salary</th>
 								<th width="200">Marital Status</th>
-								<th width="100">Active</th>
-								<th>Edit</th>
+								<th width="100">Edit</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -46,11 +44,11 @@
 										<td>${emp.title}</td>
 										<td>${emp.salary}</td>
 										<td>${emp.maritalStatus}</td>
-										<td>${emp.active}</td>
+										
 										<td><c:url value="update" var="update">
 											<c:param name="id" value="${emp.id}" />
 										</c:url> <a href="${update}"> <span
-											class="label label-default">Edit</span></td>
+											class="label label-default" style="background-color:#006dcc;">Edit</span></td>
 									</tr>
 								</c:forEach>
 							</c:if>

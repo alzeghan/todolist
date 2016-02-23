@@ -284,7 +284,7 @@ a:hover, a:focus {
 
 .span3 {
 	width: 220px;
-	height: 302px;
+	height: 375px;
 	-webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 	-moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
@@ -696,12 +696,14 @@ h1 small, h2 small, h3 small, h4 small, h5 small, h6 small {
 	color: #999
 }
 
-h1, h2, h3 {
+/* h1, h2, h3 {
 	line-height: 40px
-}
+} */
+
 
 h1 {
-	font-size: 38.5px
+	font-size: 38.5px;
+	line-height: 44px;
 }
 
 h2 {
@@ -1746,7 +1748,7 @@ table {
 
 .table th, .table td {
 	padding: 8px;
-	line-height: 20px;
+	line-height: 30px;
 	text-align: left;
 	vertical-align: top;
 	border-top: 1px solid #ddd

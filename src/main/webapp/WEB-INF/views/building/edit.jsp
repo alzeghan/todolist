@@ -13,7 +13,7 @@
         <div class="span9">
             <div class="well">
                 <div class="page-header">
-                    <h2>Update building profile</h2>
+                    <h3>Update building profile</h3><img height="100px" width="200px" src="/static/img/updateBuilding.jpg" alt="update building" />
                 </div>
 
                 <sf:form id="createTodoForm" action="/building/update.do" method="post" class="form-horizontal" modelAttribute="building">
@@ -38,7 +38,7 @@
                             </div>
                         </div>
                         
-                         <div class="control-group">
+                         <div class="control-group hide">
 							<sf:label path="active" class="control-label">
 							Active/in-active
 						</sf:label>

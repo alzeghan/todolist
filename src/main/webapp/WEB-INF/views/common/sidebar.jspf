@@ -8,15 +8,26 @@
         <li class="divider"></li> 
         <li><a href="/user/todos"><i class="icon-home"></i> Home</a></li>
         <li class="divider"></li> 
-        <li><a href="/user/account"><i class="icon-user"></i> My account</a></li>
+        <li><a href="/account"><i class="icon-user"></i> My account</a></li>
         <li class="divider"></li> 
-        <li><a href="/user/todos/new"><i class="icon-file"></i> Create a todo</a></li>
+        <li><a href="/task/create"><i class="icon-file"></i> Create a task</a></li>
+        <li class="divider"></li>
+        <li><a href="/task/list"><i class="icon-file"></i> Tasks Management</a></li>
+        <li class="divider"></li>
+        <li><a href="/building/list"><i class="icon-file"></i> Buildings Management</a></li>
         <li class="divider"></li> 
+        <li><a href="/employee/list"><i class="icon-file"></i> Employees Management</a></li>
+        <li class="divider"></li>
         <li><a href="javascript:document.getElementById('logout').submit()"><i class="icon-logout"></i> Sign out</a></li>
     </ul>
     
-<form id="logout" action="${logoutUrl}" method="post" >
-  <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-</form>
-
+    
+    <c:url value="/logout" var="logoutUrl" />
+	<form id="logout" action="${logoutUrl}" method="post" >
+  		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+	</form>
+    <c:if test="${pageContext.request.userPrincipal.name != null}">
+ 
+	</c:if>
+    
 </div>

@@ -22,7 +22,7 @@
 							<div class="profile__fields well">
 							
 								<div class="field">
-									<input type="text" class="input" id="username" name="ssoId" placeholder="Enter Username" required>
+									<input type="text" class="input" id="ssoId" name="ssoId" placeholder="Enter Username" required>
 									<p class="help-block alert-error"><sf:errors path="username" cssClass="error"/></p>
 								</div>
 								<div class="field">

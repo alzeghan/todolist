@@ -16,7 +16,7 @@
                 		<span style="float:right;">
                     		<button class="btn" onclick="javascript:window.print()">
                         		<i class="icon-print"></i>
-                        		Print todo list
+                        		Print tasks list
                     		</button>
                 		</span>
                 	</c:if></h2>

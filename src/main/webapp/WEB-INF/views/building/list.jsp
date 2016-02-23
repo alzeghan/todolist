@@ -18,8 +18,7 @@
 				
 				<div class="panel-body">
 				<c:url value="create" var="create" />
-				<a class="btn btn-primary btn-sm" role="button"
-					href="${create}"> <i class="icon-plus"></i> <span>New</span>
+				<span><a href="${create}" class="btnsub" style="padding: 10px;"> + New BUILDING</a></span>
 				</a>
 			</div>
 
@@ -30,7 +29,6 @@
 								<th width='25'>#</th>
 								<th width='300'>Name</th>
 								<th width="200">Location</th>
-								<th width="100">Active</th>
 								<th>Edit</th>
 							</tr>
 						</thead>
@@ -42,11 +40,10 @@
 										<td>${counter.count}</td>
 										<td>${building.name}</td>
 										<td>${building.location}</td>
-										<td>${building.active}</td>
 										<td><c:url value="update" var="update">
 											<c:param name="id" value="${building.id}" />
 										</c:url> <a href="${update}"> <span
-											class="label label-default">Edit</span></td>
+											class="label label-default" style="background-color:#006dcc;">Edit</span></td>
 									</tr>
 								</c:forEach>
 							</c:if>

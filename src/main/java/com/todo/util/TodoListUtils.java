@@ -1,11 +1,12 @@
 package com.todo.util;
 
-import com.todo.persistance.model.Task;
-import com.todo.persistance.model.TaskPriority;
-
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import com.todo.persistance.model.Task;
+import com.todo.persistance.model.TaskPriority;
+import com.todo.persistance.modelDTO.TaskDTO;
 
 public class TodoListUtils {
 
@@ -88,9 +89,9 @@ public class TodoListUtils {
      * @param todoList the todos list
      * @return the number of todos done
      */
-    public static int countTotalDone(List<Task> todoList) {
+    public static int countTotalDone(List<TaskDTO> todoList) {
         int count = 0;
-        for (Task task : todoList) {
+        for (TaskDTO task : todoList) {
             if (task.isStatus()) {
                 count ++;
             }

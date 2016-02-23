@@ -18,27 +18,19 @@ public class TaskDTO implements Serializable {
 	@NotEmpty
     private String description;
 	
-	@NotNull
-	@NotEmpty
     private boolean status;
-	
-	@NotNull
-	@NotEmpty
+    
 	private Employee assignedTo;
 	
 	@NotNull
-	@NotEmpty
     private TaskPriority priority;
 	
 	@NotNull
-	@NotEmpty
     private Date startDate;
 	
 	@NotNull
-	@NotEmpty
     private Date dueDate;
     
-	@NotNull
 	private boolean active;
 	
 	

@@ -13,7 +13,7 @@
 		<div class="span9">
 			<div class="well">
 				<div class="page-header">
-					<h2>Create Employee</h2>
+					<h3>Add New Employee</h3><img height="100px" width="200px" src="/static/img/newEmployee.png" alt="add new employee" />
 				</div>
 
 				<sf:form id="createEmployeeForm" action="/employee/create.do"
@@ -54,14 +54,16 @@
                             </div>
                         </div>
                         
-                          <div class="control-group">
+                          <div class="control-group hide">
 							<sf:label path="active" class="control-label">
-							Active/in-active
+							Status
 						</sf:label>
-							<sf:radiobutton path="active" value="true" />
-							Active
-							<sf:radiobutton path="active" value="false" />
-							in-Active
+							<div >
+								<sf:radiobutton path="active" value="true" style="margin-left: 20px;"/>
+								<span>Active</span>
+								<sf:radiobutton path="active" value="false" style="margin-left: 20px;" />
+								in-Active
+							</div>
 						</div>
 
 

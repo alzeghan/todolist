@@ -7,6 +7,8 @@ import com.todo.persistance.model.Task;
 public interface TaskService {
 	
 	Task createTask(Task task);
+
+	void removeTask(Task task);
 	
 	Task updateTask(Task task);
 	

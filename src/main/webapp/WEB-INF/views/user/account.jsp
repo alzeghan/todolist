@@ -1,6 +1,8 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ include file="../common/header.jspf" %>
 
@@ -12,17 +14,17 @@
         <div class="span9">
             <div class="well">
                 <div class="page-header">
-                    <h2>Account Settings</h2>
+                   
+                    <img height="100px" width="150px" src="/static/img/my_profile.jpg" alt="my profile" />
+                     <h3>Update my profile</h3>
                 </div>
 
                 <%@ include file="../common/error.jsp"%>
 
                 <div class="row">
                     <div class="span8">
-                        <form action="/user/account/update.do" method="post" class="form-horizontal">
+                        <form action="/account/update.do" method="post" class="form-horizontal">
                             <fieldset>
-                                <legend>Update my profile <p class="alert-success">${updateProfileSuccessMessage}</p></legend>
-
                                 <div class="control-group">
                                     <label class="control-label" for="id">Id:</label>
 
@@ -32,18 +34,26 @@
                                 </div>
 
                                 <div class="control-group">
-                                    <label class="control-label" for="name">Name:</label>
+                                    <label class="control-label" for="firstName">First Name:</label>
 
                                     <div class="controls">
-                                        <input name="name" id="name" value="${user.name}" type="text" class="inpbox" required="required"/>
+                                        <input name="firstName" id="firstName" value="${user.firstName}" type="text" class="inpbox" required="required"/>
+                                    </div>
+                                </div>
+                                
+                                <div class="control-group">
+                                    <label class="control-label" for="lastName">Last Name:</label>
+
+                                    <div class="controls">
+                                        <input name="lastName" id="lastName" value="${user.lastName}" type="text" class="inpbox" required="required"/>
                                     </div>
                                 </div>
 
                                 <div class="control-group">
-                                    <label class="control-label" for="email">Email:</label>
+                                    <label class="control-label" for="username">Username:</label>
 
                                     <div class="controls">
-                                        <input name="email" id="email" value="${user.email}" type="email" class="inpbox" required="required"/>
+                                        <input name="username" id="username" value="${user.username}" type="text" class="inpbox" required="required"/>
                                     </div>
                                 </div>
 
@@ -58,7 +68,7 @@
 
                 <div class="row">
                     <div class="span8">
-                        <sf:form action="/user/account/password.do" method="post" class="form-horizontal" modelAttribute="changePasswordForm">
+                        <form action="/account/password.do" method="post" class="form-horizontal" modelAttribute="changePasswordDTO">
 
                             <fieldset>
 
@@ -68,8 +78,8 @@
                                     <label class="control-label" for="currentPassword">Current password:</label>
 
                                     <div class="controls">
-                                        <sf:input type="password" id="currentPassword" path="currentPassword" class="inpbox"  placeholder="min 6 characters" required="required"/>
-                                        <p class="help-block alert-error"><sf:errors path="currentPassword" cssClass="error"/></p>
+                                        <input type="password" id="currentPassword" value="${changePasswordDTO.currentPassword}" class="inpbox"  placeholder="min 6 characters" required="required"/>
+                                        
                                     </div>
                                 </div>
 
@@ -77,8 +87,8 @@
                                     <label class="control-label" for="newPassword">New password:</label>
 
                                     <div class="controls">
-                                        <sf:input type="password" id="newPassword" path="newPassword" class="inpbox"  placeholder="min 6 characters" required="required"/>
-                                        <p class="help-block alert-error"><sf:errors path="newPassword" cssClass="error"/></p>
+                                        <input type="password" id="newPassword" value="${changePasswordDTO.newPassword}" class="inpbox"  placeholder="min 6 characters" required="required"/>
+                                        
                                     </div>
                                 </div>
 
@@ -86,8 +96,8 @@
                                     <label class="control-label" for="confirmationPassword">Confirmation password:</label>
 
                                     <div class="controls">
-                                        <sf:input type="password" id="confirmationPassword" path="confirmationPassword" class="inpbox"  placeholder="min 6 characters" required="required"/>
-                                        <p class="help-block alert-error"><sf:errors path="confirmationPassword" cssClass="error"/></p>
+                                        <input type="password" id="confirmationPassword" value="${changePasswordDTO.confirmationPassword}" class="inpbox"  placeholder="min 6 characters" required="required"/>
+                                        
                                     </div>
                                 </div>
 
@@ -95,7 +105,7 @@
                                     <button type="submit" class="btnsub"><i class="icon-refresh icon-white"></i> Update my password</button>
                                 </div>
                             </fieldset>
-                        </sf:form>
+                        </form>
                     </div>
                 </div>
 
@@ -117,7 +127,7 @@
                                         <p>Are you sure to delete your account?</p>
                                     </div>
                                     <div class="modal-footer">
-                                        <form class="form-horizontal" method="post" action="/user/account/delete.do">
+                                        <form class="form-horizontal" method="post" action="/account/delete.do">
                                             <p>
                                                 <a href="#" class="btn" data-dismiss="modal">No, I'm not sure</a>
                                                 <button type="submit" class="btn btn-danger">Yes, I do confirm!</button>

@@ -8,8 +8,7 @@ import com.todo.persistance.dao.TaskDao;
 import com.todo.persistance.model.Task;
 
 @Repository
-public class TaskDaoImpl extends AbstractGenericDaoImpl<Task, Long>
-		implements TaskDao {
+public class TaskDaoImpl extends AbstractGenericDaoImpl<Task, Long> implements TaskDao {
 
 	private static final Logger logger = LoggerFactory
 			.getLogger(TaskDaoImpl.class);

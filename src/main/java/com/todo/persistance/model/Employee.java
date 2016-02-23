@@ -6,25 +6,26 @@ import java.math.BigDecimal;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+
 import javax.persistence.Id;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.Generated;
+import org.hibernate.annotations.GenerationTime;
+import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name = "TBL_EMPLOYEE")
 public class Employee implements Serializable {
-	@Id
-	@GeneratedValue
+
+
+    @Id
+    @Generated(GenerationTime.INSERT)
 	@Column(name = "EMPLOYEE_ID")
 	private Long id;
 
 	@Column(name = "NAME", nullable = false, unique=true)
 	private String name;
-
-//	@Column(name = "DOB")
-//	private Date dateOfBirth;
-	
-//	@Column(name = "DATE_OF_HIRE")
-//	private Date dateOfHire;
 
 	@Column(name = "SALARY")
 	private BigDecimal salary;
@@ -39,12 +40,12 @@ public class Employee implements Serializable {
 	@Column(name = "ACTIVE")
 	private Boolean active;
 	
-	
-
 	public Employee() {
 		super();
 	}
 
+	@Id @GeneratedValue(generator="foreign")
+    @GenericGenerator(name="foreign", strategy = "increment")
 	public Long getId() {
 		return id;
 	}
@@ -91,6 +92,12 @@ public class Employee implements Serializable {
 
 	public void setActive(Boolean active) {
 		this.active = active;
+	}
+
+	@Override
+	public String toString() {
+		return "Employee [id=" + id + ", name=" + name + ", maritalStatus=" + maritalStatus + ", title=" + title
+				+ ", active=" + active + "]";
 	}
 	
 	

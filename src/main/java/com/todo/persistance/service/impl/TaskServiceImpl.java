@@ -4,10 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import com.todo.persistance.dao.BuildingDao;
 import com.todo.persistance.dao.TaskDao;
-import com.todo.persistance.model.Building;
 import com.todo.persistance.model.Task;
 import com.todo.persistance.service.TaskService;
 
@@ -20,7 +17,6 @@ public class TaskServiceImpl implements TaskService {
 	@Override
 	public Task createTask(Task task) {
 		taskDao.save(task);
-
 		return task;
 	}
 
@@ -36,6 +32,13 @@ public class TaskServiceImpl implements TaskService {
 
 	@Override
 	public Task updateTask(Task task) {
-		return taskDao.update(task);
+		taskDao.update(task);
+		return task;
+		
+	}
+
+	@Override
+	public void removeTask(Task task) {
+		taskDao.delete(task.getId());		
 	}
 }

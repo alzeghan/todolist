@@ -13,7 +13,7 @@
 		<div class="span9">
 			<div class="well">
 				<div class="page-header">
-					<h2>Update Employee</h2>
+					<h3>Update Employee</h3><img height="100px" width="200px" src="/static/img/updateProfile.png" alt="update employee profile" />
 				</div>
 
 				<sf:form id="createEmployeeForm" action="/employee/update.do"
@@ -55,7 +55,7 @@
                             </div>
                         </div>
                         
-                          <div class="control-group">
+                          <div class="control-group hide">
 							<sf:label path="active" class="control-label">
 							Status
 						</sf:label>
