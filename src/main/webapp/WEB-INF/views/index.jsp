@@ -78,7 +78,7 @@
 
                     <c:if test="${pageContext.request.userPrincipal.name != null}">
                         <p>
-                            <a style="padding-bottom: 20px; padding-top: 20px;" class="btnsub" href="/task/list"> My todo list >> </a>
+                            <a style="padding-bottom: 20px; padding-top: 20px;" class="btnsub" href="/task/list"> My Tasks List >> </a>
                         </p>
                     </c:if>
                 </div>

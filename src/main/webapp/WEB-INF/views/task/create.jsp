@@ -13,7 +13,7 @@
 		<div class="span9">
 			<div class="well">
 				<div class="page-header">
-					<h2>Add new Task</h2>
+					<h2>Add New Task</h2>
 				</div>
 
 				<sf:form id="createTaskForm" action="/task/create.do" method="post" class="form-horizontal" modelAttribute="task">

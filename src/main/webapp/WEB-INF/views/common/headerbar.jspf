@@ -13,7 +13,7 @@
             <div class="btn-group pull-right">
             <form class="form-search" style="margin: 0 0 5px;" action="/task/search" id="searchForm" method="get">
                 <div class="input-append">
-                    <input type="text" name="title" class="inpbox" style="width:410px; height: 30px" placeholder="Search by title" required="required">
+                    <input type="text" name="title" class="inpbox" style="width:410px; height: 30px" placeholder="Search by description" required="required">
                     <button type="submit" class="btn" style="height: 40px;">Search</button>
                 </div>
             </form>
