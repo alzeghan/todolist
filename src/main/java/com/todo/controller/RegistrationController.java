@@ -152,7 +152,7 @@ public class RegistrationController
 	        }
 	        
 	        
-	        if (userDoa.getUserByUsername(username) == null) {
+	        if (!users.getUsername().equals(username) && userDoa.getUserByUsername(username) == null) {
 	            model.addAttribute("error", messageProvider.getMessage("account.email.alreadyUsed", new Object[]{username}, Locale.ENGLISH));
 	        } else {
 	            users.setFirstName(firstName);
@@ -198,6 +198,7 @@ public class RegistrationController
 	        
 
 	        if (bindingResult.hasErrors()) {
+	        	model.addAttribute("error", messageProvider.getMessage("account.password.error", null,Locale.ENGLISH));
 	            model.addAttribute("user", users);
 	            return view;
 	        }
@@ -205,12 +206,15 @@ public class RegistrationController
 	        if (!changePasswordDTO.getNewPassword().equals(changePasswordDTO.getConfirmationPassword())) {
 	            model.addAttribute("error", messageProvider.getMessage("account.password.confirmation.error", null, Locale.ENGLISH));
 	            model.addAttribute("user", users);
+	            System.out.println(messageProvider.getMessage("account.password.confirmation.error", null, Locale.ENGLISH));
 	            return view;
 	        }
 	        
-	        if (currentPasswordIsIncorrect(changePasswordDTO, user)) {
+	        if (currentPasswordIsIncorrect(changePasswordDTO, users)) {
 	            model.addAttribute("error", messageProvider.getMessage("account.password.error", null,Locale.ENGLISH));
 	            model.addAttribute("user", users);
+	            System.out.println(messageProvider.getMessage("account.password.confirmation.error", null, Locale.ENGLISH));
+
 	            return view;
 	        }
 	        
@@ -229,7 +233,7 @@ public class RegistrationController
 
 	    }
 	    
-	    private boolean currentPasswordIsIncorrect(ChangePasswordDTO changePasswordDTO, User user) {
+	    private boolean currentPasswordIsIncorrect(ChangePasswordDTO changePasswordDTO, Users user) {
 	        return !user.getPassword().equals(changePasswordDTO.getCurrentPassword());
 	    }
 	

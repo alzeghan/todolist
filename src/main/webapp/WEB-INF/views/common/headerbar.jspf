@@ -6,7 +6,7 @@
 <div class="navbar navbar-fixed-top">
     <div class="navbar-inner">
         <div class="container">
-            <a class="brand" href="/"><img title="Emirates Reit" src="/static/img/reit-logo.png" class="logoImage"> Tasks List</a>
+            <a class="brand" href="/"><img title="Emirates Reit" src="/static/img/tasks-icon.jpg" class="logoImage"> Tasks List</a>
 
             <c:if test="${pageContext.request.userPrincipal.name != null}">            
 
