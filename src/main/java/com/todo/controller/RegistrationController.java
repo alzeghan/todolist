@@ -17,6 +17,7 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
+import org.springframework.security.web.context.HttpSessionSecurityContextRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -96,6 +97,12 @@ public class RegistrationController
 			request.setAttribute("loggedInUser", userDTO.getUsername());
 			model = new ModelAndView("index");
 			
+			
+			
+			Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+			auth.setAuthenticated(true);
+			 request.getSession().setAttribute(HttpSessionSecurityContextRepository.SPRING_SECURITY_CONTEXT_KEY, SecurityContextHolder.getContext());
+		        
 			try {
 					authenticateUser(user);
 			    } catch (Exception e) {
@@ -114,6 +121,7 @@ public class RegistrationController
 	    public ModelAndView redirectToAccountPage() {
 	        ModelAndView modelAndView = new ModelAndView("user/account");
 	        try{
+	        	System.out.println(SecurityContextHolder.getContext().getAuthentication().getPrincipal());
 	        	final User user = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		        Users users = userService.getValidUserByUsername(user.getUsername());
 		        System.out.println(users.getFirstName());
@@ -121,7 +129,9 @@ public class RegistrationController
 		        modelAndView.addObject("user", users);
 		        modelAndView.addObject("changePasswordDTO", changePasswordDTO);
 	        }catch(Exception ex){
-	        	System.out.println("ERROR: " + ex.getMessage());
+	        	System.out.println("ERROR:1 " + ex.getMessage());
+	        	modelAndView.setViewName("user/login");
+        		return modelAndView;
 	        }
 	        
 	        
@@ -138,7 +148,7 @@ public class RegistrationController
 	        	
 		        users = userService.getValidUserByUsername(user.getUsername());
 	        }catch(Exception ex){
-	        	System.out.println("ERROR: " + ex.getMessage());
+	        	System.out.println("ERROR:2 " + ex.getMessage());
 	        }
 	        
 	        
@@ -201,7 +211,7 @@ public class RegistrationController
 		        users.setPassword(changePasswordDTO.getNewPassword());
 		        userDoa.update(users);     
 	        }catch(Exception ex){
-	        	System.out.println("ERROR: " + ex.getMessage());
+	        	System.out.println("ERROR: 3" + ex.getMessage());
 	        }
 	        
 	        

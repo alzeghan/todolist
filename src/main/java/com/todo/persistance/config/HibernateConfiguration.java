@@ -20,7 +20,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @Configuration
 @EnableTransactionManagement
 @PropertySource("classpath:/application.properties")
-@ComponentScan({ "com.qxl.persistence" })
+@ComponentScan({ "com.todo.persistence" })
 
 public class HibernateConfiguration {
 

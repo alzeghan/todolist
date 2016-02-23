@@ -135,24 +135,6 @@ public abstract class AbstractGenericDaoImpl<T, ID extends Serializable> impleme
 		return entityClass;
 	}
 
-	// public MatchMode getMatchMode(String matchMode) {
-	// if (matchMode == null || matchMode.trim().length() == 0) {
-	// return MatchMode.ANYWHERE;
-	// }
-	// matchMode = matchMode.toUpperCase();
-	// if (MatchMode.EXACT.equals(matchMode)) {
-	// return MatchMode.EXACT;
-	// }
-	// if (MatchMode.END.equals(matchMode)) {
-	// return MatchMode.END;
-	// }
-	// if (MatchMode.START.equals(matchMode)) {
-	// return MatchMode.START;
-	// } else {
-	// return MatchMode.ANYWHERE;
-	// }
-	// }
-	
 	@Transactional
 	public T findByKey(final String key, final String value) {
 		EntityManager em = getEntityManager();

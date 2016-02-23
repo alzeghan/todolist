@@ -39,6 +39,17 @@
 							
 							</div>
 						</div>
+						
+						<div class="control-group">
+							<label class="control-label" for="building">Building:</label>
+							<div class="controls">
+							
+									<form:select path="building.id">
+					  					<form:options items="${allBuildings}" itemValue="id" itemLabel="name"/>
+				       				</form:select>
+							
+							</div>
+						</div>
 							
 						<div class="control-group">
                             <label class="control-label" for="priority">Priority:</label>

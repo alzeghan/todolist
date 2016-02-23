@@ -7,6 +7,7 @@ import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
+import com.todo.persistance.model.Building;
 import com.todo.persistance.model.Employee;
 import com.todo.persistance.model.TaskPriority;
 
@@ -21,6 +22,8 @@ public class TaskDTO implements Serializable {
     private boolean status;
     
 	private Employee assignedTo;
+	
+	private Building building;
 	
 	@NotNull
     private TaskPriority priority;
@@ -64,6 +67,14 @@ public class TaskDTO implements Serializable {
 
 	public void setAssignedTo(Employee assignedTo) {
 		this.assignedTo = assignedTo;
+	}
+
+	public Building getBuilding() {
+		return building;
+	}
+
+	public void setBuilding(Building building) {
+		this.building = building;
 	}
 
 	public TaskPriority getPriority() {

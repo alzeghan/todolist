@@ -38,7 +38,16 @@
 							
 							</div>
 						</div>
+							<div class="control-group">
+							<label class="control-label" for="building">Building:</label>
+							<div class="controls">
 							
+									<form:select path="building.id">
+					  					<form:options items="${allBuildings}" itemValue="id" itemLabel="name"/>
+				       				</form:select>
+							
+							</div>
+						</div>
 								
 						<div class="control-group">
                             <label class="control-label" for="status">Progress:</label>
@@ -80,7 +89,7 @@
                         </div>
 							
 						
-						<div class="form-group">
+						<div class="form-group hide">
 							<sf:label path="active" class="control-label">
 							Status
 						</sf:label>

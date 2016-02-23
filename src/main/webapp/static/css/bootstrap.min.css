@@ -336,7 +336,7 @@ a:hover, a:focus {
 }
 
 .offset3 {
-	margin-left: 260px
+	margin-left: 450px
 }
 
 .offset2 {
@@ -573,7 +573,8 @@ a:hover, a:focus {
 .container {
 	margin-right: auto;
 	margin-left: auto;
-	*zoom: 1
+	*zoom: 1;
+	width:90%;
 }
 
 .container:before, .container:after {
@@ -2811,6 +2812,7 @@ table td[class*="span"], table th[class*="span"], .row-fluid table td[class*="sp
 }
 
 .well {
+	width:1000px;
 	min-height: 20px;
 	padding: 19px;
 	margin-bottom: 20px;
@@ -4166,7 +4168,7 @@ button.btn.btn-mini, input[type="submit"].btn.btn-mini {
 
 .navbar-static-top .container, .navbar-fixed-top .container,
 	.navbar-fixed-bottom .container {
-	width: 940px
+	width: 87%
 }
 
 .navbar-fixed-top {

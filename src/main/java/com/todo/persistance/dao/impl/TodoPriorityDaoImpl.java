@@ -20,19 +20,6 @@ public class TodoPriorityDaoImpl extends AbstractGenericDaoImpl<TaskPriority, In
 	private static final Logger logger = LoggerFactory.getLogger(TodoPriorityDaoImpl.class);
 
 	public List<Users> getUserById(int userId) {
-		try {
-//			Criteria criteria = getSession().createCriteria(HubRoute.class);
-//			criteria.createAlias("hubFrom", "hubFrom");
-//			criteria.createAlias("hubFrom.country", "country");
-//			criteria.add(Restrictions.eq("country.code", countryCode));
-//			@SuppressWarnings("unchecked")
-//			List<HubRoute> list = criteria.list();
-//
-//			return list;
-
-		} catch (Exception ex) {
-			logger.error(ex.getMessage());
-		}
 		return null;
 
 	}

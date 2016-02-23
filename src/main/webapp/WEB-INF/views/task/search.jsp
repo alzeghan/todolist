@@ -1,19 +1,18 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
-<%@ taglib prefix="tl" uri="alzeghantask" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="tl" uri="alzeghantask" %> 
 <%@ include file="../common/header.jspf"%>
 
 <div class="container">
-	<div class="row">
-		<div class="span3">
-			<%@ include file="../common/sidebar.jspf"%>
-		</div>
-		<div class="span9">
-			<div class="well">
-				<div class="page-header">
-					<h2>Tasks list <c:if test="${not empty taskList}">
+    <div class="row">
+        <div class="span3">
+            <%@ include file="../common/sidebar.jspf"%>
+        </div>
+        <div class="span9">
+            <div class="well">
+                <div class="page-header">
+                    <h2>Tasks list <c:if test="${not empty taskList}">
                 		<span style="float:right;">
                     		<button class="btn" onclick="javascript:window.print()">
                         		<i class="icon-print"></i>
@@ -21,14 +20,9 @@
                     		</button>
                 		</span>
                 	</c:if></h2>
-				</div>
-				
-				<div class="panel-body"  style="margin-bottom: 10px;">
-				<c:url value="create" var="create" />
-				<span><a href="${create}" class="btnsub" style="padding: 10px;"> + New Task</a></span>
-			</div>
+                </div>
 
-				<div class="table-responsive">
+                <div class="table-responsive">
 					<table class="table table-hover table table-striped">
 						<thead>
 							<tr>
@@ -94,9 +88,15 @@
 					</table>
 				</div>
 
-			</div>
-		</div>
-	</div>
+                <c:if test="${empty taskList}">
+                    <div class="alert alert-info">
+                        <div align="center">No todo with title '${title}'</div>
+                    </div>
+                </c:if>
+
+            </div>
+        </div>
+    </div>
 </div>
 
 <%--end content--%>

@@ -17,7 +17,7 @@
                 <%@ include file="../common/error.jsp"%>
 
                 <fieldset>
-				<div class="profile__fields well">
+				<div class="profile__fields well" style="width:400px;">
 				
 				
                     <div class="field">

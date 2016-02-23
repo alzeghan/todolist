@@ -19,19 +19,6 @@ public class UserDaoImpl extends AbstractGenericDaoImpl<Users, Integer> implemen
 	private static final Logger logger = LoggerFactory.getLogger(UserDaoImpl.class);
 
 	public List<Users> getUserById(int userId) {
-		try {
-//			Criteria criteria = getSession().createCriteria(HubRoute.class);
-//			criteria.createAlias("hubFrom", "hubFrom");
-//			criteria.createAlias("hubFrom.country", "country");
-//			criteria.add(Restrictions.eq("country.code", countryCode));
-//			@SuppressWarnings("unchecked")
-//			List<HubRoute> list = criteria.list();
-//
-//			return list;
-
-		} catch (Exception ex) {
-			logger.error(ex.getMessage());
-		}
 		return null;
 
 	}
@@ -60,19 +47,7 @@ public class UserDaoImpl extends AbstractGenericDaoImpl<Users, Integer> implemen
 		}
 		
 		return false;
-
-		
-		
-////		String query = "Select count(1) from user where username = ? and password = ?";
-////		PreparedStatement pstmt = dataSource.getConnection().prepareStatement(query);
-////		pstmt.setString(1, username);
-////		pstmt.setString(2, password);
-//		ResultSet resultSet = pstmt.executeQuery();
-//		if(resultSet.next())
-//		    return (resultSet.getInt(1) > 0);
-//        else
-//           return false;
-       }
+	}
 	@Override
 	public Users getUserByUsernamePassword(String username, String password){
 		try {

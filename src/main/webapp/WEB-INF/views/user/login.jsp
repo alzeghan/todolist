@@ -12,14 +12,14 @@
                 <h1>Login</h1>
                 <%@ include file="../common/error.jsp"%>
 							<c:if test="${param.logout != null}">
-								<div class="alert alert-success">
+								<div class="alert alert-success" style="width:390px;">
 									<p>You have been logged out successfully.</p>
 								</div>
 							</c:if>
 				<div class="profile--open">
                 	<c:url var="loginUrl" value="/login" />
 						<form action="${loginUrl}" method="post">
-							<div class="profile__fields well">
+							<div class="profile__fields well" style="width:400px;">
 							
 								<div class="field">
 									<input type="text" class="input" id="ssoId" name="ssoId" placeholder="Enter Username" required>

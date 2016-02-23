@@ -6,12 +6,12 @@
 <div class="navbar navbar-fixed-top">
     <div class="navbar-inner">
         <div class="container">
-            <a class="brand" href="/"><img title="Emirates Reit" src="/static/img/reit-logo.png" class="logoImage"> Todo List</a>
+            <a class="brand" href="/"><img title="Emirates Reit" src="/static/img/reit-logo.png" class="logoImage"> Tasks List</a>
 
             <c:if test="${pageContext.request.userPrincipal.name != null}">            
-            
+
             <div class="btn-group pull-right">
-            <form class="form-search" style="margin: 0 0 5px;" action="/user/todos/search" id="searchForm" method="get">
+            <form class="form-search" style="margin: 0 0 5px;" action="/task/search" id="searchForm" method="get">
                 <div class="input-append">
                     <input type="text" name="title" class="inpbox" style="width:410px; height: 30px" placeholder="Search by title" required="required">
                     <button type="submit" class="btn" style="height: 40px;">Search</button>

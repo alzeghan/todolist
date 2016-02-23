@@ -16,5 +16,7 @@ public interface TaskService {
 	
 	Task getTaskById(Long id);
 	
+	List<Task> searchTodoListByTitle(String title);
+	
 
 }

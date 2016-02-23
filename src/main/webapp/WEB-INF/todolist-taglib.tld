@@ -6,7 +6,7 @@
 
     <tlib-version>1.0</tlib-version>
     <short-name>todolist-taglib</short-name>
-    <uri>emiratestodo</uri>
+    <uri>alzeghantask</uri>
 
     <tag>
         <description>Tag that highlights patterns in its body content with a given css style</description>

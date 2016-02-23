@@ -41,4 +41,13 @@ public class TaskServiceImpl implements TaskService {
 	public void removeTask(Task task) {
 		taskDao.delete(task.getId());		
 	}
+
+	@Override
+	public List<Task> searchTodoListByTitle(String title) {
+
+		return taskDao.getTaskListByTitle(title);
+	}
+	
+	
 }
+

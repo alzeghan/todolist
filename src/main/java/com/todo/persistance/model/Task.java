@@ -13,6 +13,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -43,6 +45,11 @@ public class Task implements Serializable {
     @OneToOne
     @JoinColumn(name = "EMPLOYEE_ID") 
     private Employee employee;
+    
+    @OneToOne
+    @JoinColumn(name = "id") 
+    private Building building;
+
 
     @Enumerated(value = EnumType.ORDINAL)
     private TaskPriority priority;
@@ -104,6 +111,14 @@ public class Task implements Serializable {
 
 	public void setEmployee(Employee assignedTo) {
 		this.employee = assignedTo;
+	}
+
+	public Building getBuilding() {
+		return building;
+	}
+
+	public void setBuilding(Building building) {
+		this.building = building;
 	}
 
 	public TaskPriority getPriority() {

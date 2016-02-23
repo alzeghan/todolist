@@ -10,7 +10,7 @@
 
 	<jsp-config>
   		<taglib>
-    	<taglib-uri>emiratestodo</taglib-uri>
+    	<taglib-uri>alzeghantask</taglib-uri>
     		<taglib-location>WEB-INF/todolist-taglib.tld</taglib-location>
   		</taglib>
 	</jsp-config>

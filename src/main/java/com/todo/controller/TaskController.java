@@ -25,23 +25,28 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
+import com.todo.persistance.model.Building;
 import com.todo.persistance.model.Employee;
 import com.todo.persistance.model.Task;
-import com.todo.persistance.model.TaskPriority;
 import com.todo.persistance.modelDTO.TaskDTO;
 import com.todo.persistance.modelDTO.WebModelUtil;
+import com.todo.persistance.service.BuildingService;
 import com.todo.persistance.service.EmployeeService;
 import com.todo.persistance.service.TaskService;
 import com.todo.persistance.service.UserService;
 import com.todo.util.TodoListUtils;
-import com.todo.util.TodoPriorityPropertyEditor;
 
+@EnableWebMvc
 @Controller
 @RequestMapping("/task")
 public class TaskController {
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private BuildingService buildingService;
 	
 	@Autowired
 	private EmployeeService employeeService;
@@ -61,7 +66,6 @@ public class TaskController {
         SimpleDateFormat dateFormat = new SimpleDateFormat(TodoListUtils.DATE_FORMAT);
         dateFormat.setLenient(false);
         binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, false));
-//        binder.registerCustomEditor(TaskPriority.class, new TodoPriorityPropertyEditor());
     }
 	
 	
@@ -72,8 +76,6 @@ public class TaskController {
 		List<Task> taskFromDb = taskService.getAllTasks();
 		List<TaskDTO> taskList = new ArrayList<TaskDTO>();
 		for (Task task : taskFromDb) {
-//			System.out.println(task.getDescription());
-//			System.out.println(task.getEmployee().toString());
 			taskList.add(WebModelUtil.createTaskDTO(task));
 		}
 		
@@ -100,8 +102,10 @@ public class TaskController {
 		task.setActive(true);
 		
 		List<Employee> allEmployees = employeeService.getAllEmployee();
+		List<Building> allBuildings = buildingService.getAllBuilding();
 		model.addAttribute("today", new SimpleDateFormat(TodoListUtils.DATE_FORMAT).format(new Date()));
 		modelview.addObject("allEmployees",allEmployees);
+		modelview.addObject("allBuildings",allBuildings);
 		modelview.addObject("task", task);
 
 		return modelview;
@@ -115,15 +119,17 @@ public class TaskController {
 		ModelAndView model = new ModelAndView();
 		try {
 			Employee emp = employeeService.getEmployeeById(requestModel.getAssignedTo().getId());
+			Building bld = buildingService.getBuildingById(requestModel.getBuilding().getId());
 			
 			Task task = new Task();
 			
 			task.setEmployee(emp);
+			task.setBuilding(bld);
 			task.setDescription(requestModel.getDescription());
-//			task.setDueDate(requestModel.getDueDate());
-//			task.setStartDate(requestModel.getStartDate());
-			task.setDueDate(new Date());
-			task.setStartDate(new Date());
+			task.setDueDate(requestModel.getDueDate());
+			task.setStartDate(requestModel.getStartDate());
+//			task.setDueDate(new Date());
+//			task.setStartDate(new Date());
 			task.setStatus(false);
 			task.setActive(requestModel.isActive());
 			task.setPriority(requestModel.getPriority());
@@ -147,7 +153,9 @@ public class TaskController {
 		ModelAndView modelview = new ModelAndView("task/edit");
 		Task task = taskService.getTaskById(id);
 		List<Employee> allEmployees = employeeService.getAllEmployee();
+		List<Building> allBuildings = buildingService.getAllBuilding();
 		modelview.addObject("allEmployees",allEmployees);
+		modelview.addObject("allBuildings",allBuildings);
 		modelview.addObject("task",WebModelUtil.createTaskDTO(task));
 
 		return modelview;
@@ -164,10 +172,11 @@ public class TaskController {
 			
 			System.out.println("requestModel.getDescription(): "+requestModel.toString());
 			Employee emp = employeeService.getEmployeeById(requestModel.getAssignedTo().getId());
-			
+			Building bld = buildingService.getBuildingById(requestModel.getBuilding().getId());
 			Task task = taskService.getTaskById(requestModel.getId());
 			
 			task.setEmployee(emp);
+			task.setBuilding(bld);
 			task.setDescription(requestModel.getDescription());
 			task.setDueDate(requestModel.getDueDate());
 			task.setStartDate(requestModel.getStartDate());
@@ -202,4 +211,31 @@ public class TaskController {
       return modelAndView;
   }
 
+  @RequestMapping(value = "/search", method = RequestMethod.GET)
+  public ModelAndView searchTodoList(@RequestParam String title, Model model) {
+	  
+
+		ModelAndView modelAndView = new ModelAndView();
+		List<Task> todoList = taskService.searchTodoListByTitle(title);
+		List<TaskDTO> taskList = new ArrayList<TaskDTO>();
+		for (Task task : todoList) {
+			taskList.add(WebModelUtil.createTaskDTO(task));
+		}
+	    model.addAttribute("taskList", todoList);
+	    model.addAttribute("title", title);
+
+		int totalCount = taskList.size();
+      int doneCount = TodoListUtils.countTotalDone(taskList);
+      int todoCount = totalCount - doneCount;
+      modelAndView.addObject("totalCount", totalCount);
+      modelAndView.addObject("doneCount", doneCount);
+      modelAndView.addObject("todoCount", todoCount);
+      modelAndView.addObject("homeTabStyle", "active");
+      
+      
+		modelAndView.setViewName("task/search");
+		modelAndView.addObject("taskList", taskList);
+		return modelAndView;
+	
+}
 }
